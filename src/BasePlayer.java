@@ -1,3 +1,23 @@
+
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import org.aiwolf.client.lib.Content;
+import org.aiwolf.client.lib.Topic;
+import org.aiwolf.common.data.Agent;
+import org.aiwolf.common.data.Judge;
+import org.aiwolf.common.data.Player;
+import org.aiwolf.common.data.Role;
+import org.aiwolf.common.data.Status;
+import org.aiwolf.common.data.Talk;
+import org.aiwolf.common.net.GameInfo;
+import org.aiwolf.common.net.GameSetting;
+
 public class BasePlayer implements Player {
 
 	/** このエージェント */
@@ -25,7 +45,7 @@ public class BasePlayer implements Player {
 	List<Judge> identList = new ArrayList<Judge>();
 
 	/** 発言用Talkキュー */
-	TalkQueue talkQueue;
+	Deque<Content> talkQueue = new LinkedList<Content>();
 
 	/** カミングアウト状況 */
 	Map<Agent, Role> comingoutMap = new HashMap<Agent, Role>();
@@ -136,10 +156,6 @@ public class BasePlayer implements Player {
 		divinationList.clear();
 		// 霊媒リストはclearで初期化
 		identList.clear();
-		// トークキューはインスタンスの作成に自分の情報が必要なので，インスタンスの(再)作成で初期化
-		talkQueue = new TalkQueue(me);
-		// isECIS=true -> 連続する会話を除外する設定をONにする
-		talkQueue.isECIS(true);
 		// カミングアウトマップはclearで初期化
 		comingoutMap.clear();
 	}
@@ -255,7 +271,14 @@ public class BasePlayer implements Player {
 	 */
 	@Override
 	public String talk() {
-		return talkQueue.talk();
+		if (talkQueue.isEmpty()) {
+			return Talk.SKIP;
+		}
+		Content content = talkQueue.poll();
+		if (content.getSubject() == me) {
+			return Content.stripSubject(content.getText());
+		}
+		return content.getText();
 	}
 
 	/**

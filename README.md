@@ -5,6 +5,7 @@
 
 ```bash
 .
+├── .gitignore
 ├── LICENSE #ライセンス
 ├── README.md #このmdファイル
 │

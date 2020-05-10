@@ -17,7 +17,7 @@
 │   ├── AIWolf-ver0.6.0/ #人狼知能プラットフォーム
 │   └── aiwolf-docs-ver0.5.1.zip #人狼知能プラットフォームのJavaDocのzip
 │
-└── src #今回のチュートリアルで出来上がるもの
+└── src #人狼知能チュートリアルで出来上がるもの
     └── jp/ac/aitech/maslab/aiwt/player/
         ├── BasePlayer.java
         ├── RoleAssignPlayer.java

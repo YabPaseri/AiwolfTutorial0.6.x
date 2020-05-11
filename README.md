@@ -3,7 +3,7 @@
 
 ## tree
 
-```bash
+```powershell
 .
 ├── .gitignore
 ├── LICENSE #ライセンス
@@ -12,7 +12,9 @@
 ├── document/
 │   ├── IntroductionToAiwolf.pdf #人狼知能チュートリアル
 │   ├── JavaClassMethodVariable.pdf #補助資料:クラス・メソッド・変数の呼び方
-│   └── docs/ #JavaDocのzipを展開したもの
+│   ├── MiniTips.md #補助資料:そこまで重要じゃない内容，ほんとにtips
+│   ├── docs/ #JavaDocのzipを展開したもの
+│   └── source/ #MiniTips内で触れたソースコード
 │
 ├── lib
 │   ├── AIWolf-ver0.6.0/ #人狼知能プラットフォーム
